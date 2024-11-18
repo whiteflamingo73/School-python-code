@@ -74,7 +74,7 @@ print()
 printChars(ch1, ch2, numPerLine)
 
 #Problem 4. is it a palindrome?
-
+'''
 def palindrome(user_digit, user_palindrome):
     
     
@@ -90,4 +90,28 @@ def palindrome(user_digit, user_palindrome):
 user_digit = str(input("Give me a three digit number: "))
 user_palindrome = str(user_digit) == str(user_digit)[::-1]
 palindrome(user_digit, user_palindrome)
+'''
+reverseInp = 0
 
+def reverseInt(inp):
+
+    reverseInp = reversed(str(inp))
+    return reverseInp
+
+
+
+def isPalindrome(inp, reverseInp):
+    reverseInp == inp
+    return reverseInp
+    
+inp = input("give me a number: ")
+
+reverseInt(inp)
+
+print("Your Number is a palindrome:")
+
+if reverseInp == True:
+    print(True)
+else:
+    print(False)
+print()
