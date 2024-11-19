@@ -72,8 +72,10 @@ numPerLine = eval(input("Enter a number for how many letters you want displayed 
 print()
 
 printChars(ch1, ch2, numPerLine)
+print()
 
 #Problem 4. is it a palindrome?
+#This needs to be two functions and i need to reverse the digits
 '''
 def palindrome(user_digit, user_palindrome):
     
@@ -87,31 +89,81 @@ def palindrome(user_digit, user_palindrome):
     print()
 
 
-user_digit = str(input("Give me a three digit number: "))
+user_digit = str(input("Give me a number: "))
 user_palindrome = str(user_digit) == str(user_digit)[::-1]
 palindrome(user_digit, user_palindrome)
+
 '''
+''''
+#Code Mr. Lambiase deemed bad
 reverseInp = 0
 
 def reverseInt(inp):
-
     reverseInp = reversed(str(inp))
     return reverseInp
-
 
 
 def isPalindrome(inp, reverseInp):
     reverseInp == inp
     return reverseInp
-    
+'''
+def reverseInt(inp):
+    reverseInp = str()
+    for digit in str(inp):
+        reverseInp = digit + reverseInp
+    return int(reverseInp)
+
+def isPalindrome(inp):
+    return int(inp) == reverseInt(inp)
+
+
 inp = input("give me a number: ")
 
-reverseInt(inp)
+
 
 print("Your Number is a palindrome:")
+print(isPalindrome(inp))
 
-if reverseInp == True:
-    print(True)
-else:
-    print(False)
+
 print()
+
+#Problem 5: Palindrome Prime
+
+def isPrime(num):
+    PrimeCounter = 0
+    if num > 1:
+        for i in range(2, (num//2)+1):
+            if (num % i) == 0:
+                break
+        else:
+            return True
+        
+        
+            
+
+
+#All you have to do is to generate numbers(smaller to greatest) and check if it's prime, and if it's prime
+#you run it through the "Is Palindrome" function, and with the returned value, you run it through numbers
+#of prime, and as long as it's true, you print the number
+
+
+def palindromicPrime(NumOfPrimes):
+    PrimeCounter = 0
+    LineCounter = 0
+    CurrentNum = 2
+    while PrimeCounter < NumOfPrimes:
+        if isPrime(num) and isPalindrome(num):
+            print("{:<5}".format(num), end=" ")
+            PrimeCounter += 1
+            LineCounter += 1
+            if LineCounter == 10:
+                print()
+                LineCounter = 0
+            num += 1
+    print()
+    print("Done")
+
+
+NumofPrimes = eval(input("How many palindromic primes do you want to see? "))
+isPrime(num)
+palindromicPrime(NumofPrimes)
