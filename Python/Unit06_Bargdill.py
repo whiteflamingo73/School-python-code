@@ -150,16 +150,16 @@ def isPrime(num):
 def palindromicPrime(NumOfPrimes):
     PrimeCounter = 0
     LineCounter = 0
-    CurrentNum = 2
+    Num = 2
     while PrimeCounter < NumOfPrimes:
         if isPrime(num) and isPalindrome(num):
-            print("{:<5}".format(num), end=" ")
+            print(f"{num:5}", end=" ")
             PrimeCounter += 1
             LineCounter += 1
             if LineCounter == 10:
                 print()
                 LineCounter = 0
-            num += 1
+        num += 1
     print()
     print("Done")
 
