@@ -107,13 +107,83 @@ print(f'The sorted list is: {myList}')
 def shuffle(lst):
     newList = []
     for num in myList:
-        num = (random.randint(0,len(myList))) #num becomes the index, but we have to return the value from that position
-        myList.pop(num)
-        newList.append(num)
+        amount = len(myList)
+        num = (random.sample(lst, amount)) #num becomes the index, but we have to return the value from that position
+        lst = num
+        #need to append the random number being chosen to the new list
+        return num
     return newList
 
 newList = shuffle(myList)
 print(f'The reshuffled list is: {newList}')
 
-    
 
+#Problem 4: Revise Selection Sort
+print()
+print("Problem 4: Revise Selection Sort")
+print()
+
+#sorts list
+#starts at beginning of list
+#finds smallest number in list and swaps with first item
+#next smallest is swapped with next index in list
+def selectionSortsm(lst):
+  swaps = 0  #swaps counts how many times numbers were swapped to get the list in order
+  for i in range(len(lst)):
+    # Find the minimum in the lst[i : len(lst)]
+    currentMin = lst[i]
+    currentMinIndex = i
+    
+    #looks to see if there is a smaller number in the list and sets that to the smallest if it finds it
+    for j in range(i + 1, len(lst)):
+      if currentMin > lst[j]:
+        currentMin = lst[j]
+        currentMinIndex = j
+    
+    # Swap lst[i] with lst[currentMinIndex] if necessary
+    if currentMinIndex != i:
+      lst[currentMinIndex] = lst[i]
+      lst[i] = currentMin
+      swaps += 1
+  print("Swaps", swaps)
+
+
+"""Largest to Smallest"""
+
+def selectionSortlg(lst):
+  swaps = 0  #swaps counts how many times numbers were swapped to get the list in order
+  for i in range(len(lst) - 1, -1):
+    # Find the minimum in the lst[i : len(lst)]
+    currentMin = lst[i]
+    currentMinIndex = i
+    #looks to see if there is a smaller number in the list and sets that to the smallest if it finds it
+    for j in range(i -1, len(lst)):
+      if currentMin > lst[j]:
+        currentMin = lst[j]
+        currentMinIndex = j
+    # Swap lst[i] with lst[currentMinIndex] if necessary
+    if currentMinIndex != i:
+      lst[currentMinIndex] = lst[i]
+      lst[i] = currentMin
+      swaps += 1
+  print("Swaps", swaps)
+
+
+
+
+
+"create lists and sort with functions"
+
+
+OrderList = []
+for i in range(10):
+    OrderList.append(random.randint(0,100))
+
+OrderList2 = OrderList.copy()
+
+selectionSortsm(OrderList)
+print(OrderList)
+print()
+
+selectionSortlg(OrderList2)
+print(OrderList2)
