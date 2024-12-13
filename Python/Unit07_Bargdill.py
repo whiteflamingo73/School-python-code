@@ -152,24 +152,21 @@ def selectionSortsm(lst):
 
 def selectionSortlg(lst):
   swaps = 0  #swaps counts how many times numbers were swapped to get the list in order
-  for i in range(len(lst) - 1, -1):
+  for i in range(len(lst) - 1, 0, -1):
     # Find the minimum in the lst[i : len(lst)]
-    currentMin = lst[i]
-    currentMinIndex = i
+    currentMax = lst[i]
+    currentMaxIndex = i
     #looks to see if there is a smaller number in the list and sets that to the smallest if it finds it
-    for j in range(i -1, len(lst)):
-      if currentMin > lst[j]:
-        currentMin = lst[j]
-        currentMinIndex = j
+    for j in range(i -1, -1, -1):
+      if currentMax < lst[j]: #sorts the same list in two different ways, if you flip the sign it becomes largest to smallest
+        currentMax = lst[j]
+        currentMaxIndex = j
     # Swap lst[i] with lst[currentMinIndex] if necessary
-    if currentMinIndex != i:
-      lst[currentMinIndex] = lst[i]
-      lst[i] = currentMin
+    if currentMaxIndex != i:
+      lst[currentMaxIndex] = lst[i]
+      lst[i] = currentMax
       swaps += 1
   print("Swaps", swaps)
-
-
-
 
 
 "create lists and sort with functions"
@@ -187,3 +184,97 @@ print()
 
 selectionSortlg(OrderList2)
 print(OrderList2)
+
+
+#Problem 5: Bubble Sort
+
+print()
+print("Problem 5: Bubble Sort")
+print()
+
+
+bubbleList = []
+for i in range(10):
+   bubbleList.append(random.randint(0,100))
+
+
+def bubbleSort(lst):
+    swaps = 0
+    sorted = False
+    while sorted == False:
+        swapped = False
+        for i in range(len(lst) - 1):
+            if lst[i] > lst[i + 1]:
+                lst[i], lst[i+1] = lst[i+1], lst[i]
+                swaps += 1
+                swapped = True
+        if swapped == False:
+            sorted = True
+
+    print(f"Amount of Swaps: {swaps}")
+    return lst
+            
+         
+        
+      
+print("original")
+print(bubbleList)
+print()
+
+print("Bubble Sorted")
+
+bubbleSort(bubbleList)
+print(bubbleList)
+
+
+#Problem 6: Merge Sort
+print()
+print("Problem 6: Merge Sort")
+print()
+
+#first list
+merge1 = []
+for i in range(5):
+   merge1.append(random.randint(0,100))
+
+
+#second list
+merge2 = []
+for i in range(5):
+   merge2.append(random.randint(0,100))
+
+
+
+def merge(lst1, lst2):
+    mergedList = []
+    while lst1 or lst2:
+        if lst1[0] < lst2[0]:
+            mergedList.append(lst1[0])
+            lst1.pop(0)
+        if lst1[0] > lst2[0]:
+           mergedList.append(lst2[0])
+           lst2.pop(0)
+        if lst1 == False:
+           mergedList + lst2
+        if lst2 == False:
+           mergedList + lst1
+    print(mergedList)
+ 
+
+
+
+
+
+
+print("The two lists unsorted")
+print(f"{merge1} and {merge2}")
+print()
+
+merge1.sort()
+merge2.sort
+print("The two lists sorted:")
+print(f"{merge1} and {merge2}")
+print()
+
+print("The two lists merged together and sorted:")
+merge(merge1, merge2)
