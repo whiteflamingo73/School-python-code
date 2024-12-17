@@ -247,23 +247,20 @@ for i in range(5):
 
 def merge(lst1, lst2):
     mergedList = []
-    while lst1 or lst2:
+    while lst1 and lst2:
         if lst1[0] < lst2[0]:
-            mergedList.append(lst1[0])
-            lst1.pop(0)
-        if lst1[0] > lst2[0]:
-           mergedList.append(lst2[0])
-           lst2.pop(0)
-        if lst1 == False:
-           mergedList + lst2
-        if lst2 == False:
-           mergedList + lst1
+        
+            mergedList.append(lst1.pop(0))
+                
+        else:
+            mergedList.append(lst2.pop(0))
+
+    mergedList.extend(lst1)
+    mergedList.extend(lst2)
     print(mergedList)
+    return(mergedList)
+    
  
-
-
-
-
 
 
 print("The two lists unsorted")
@@ -271,10 +268,10 @@ print(f"{merge1} and {merge2}")
 print()
 
 merge1.sort()
-merge2.sort
+merge2.sort()
 print("The two lists sorted:")
 print(f"{merge1} and {merge2}")
 print()
 
 print("The two lists merged together and sorted:")
-merge(merge1, merge2)
+mergedList = merge(merge1, merge2)
