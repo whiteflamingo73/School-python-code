@@ -275,3 +275,21 @@ print()
 
 print("The two lists merged together and sorted:")
 mergedList = merge(merge1, merge2)
+
+
+#Problem 7: The Locker Problem
+
+lockerList = [False for x in range(101)]
+
+for student in range(1,101):
+   
+   for step in range(student, 101, student):
+        if lockerList[step]:
+            lockerList[step] = False
+        else:
+            lockerList[step] = True
+
+for item in range(101):
+    if lockerList[item]:
+        print(f"Locker {item} is open")
+
