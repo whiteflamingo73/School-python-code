@@ -100,3 +100,39 @@ def prob2():
 
 
 prob2()
+
+
+############################## THREE #################################
+def prob3():
+  from Student import Student
+  student = Student()
+
+  student.setName()
+
+  
+  studentGrade = input("What is your graduating year? ")
+  student.setGradYear(studentGrade)
+
+  studentTown = str(input("What town are you from? "))
+  student.setTown(studentTown)
+
+  AddingClasses = True
+  while AddingClasses == True:
+    aClass = input("Give a class you're in: ")
+
+    aScore = input("Give the score you have in the class you just entered: ")
+
+    student.addClass(aClass, aScore)
+
+    Continue = input("Do you want to add more classes? input YES or NO ")
+    if Continue == "YES" or Continue == "yes" or Continue == "Yes" or Continue == "y" or Continue == "Y":
+      AddingClasses = True
+    if Continue == "NO" or Continue == "no" or Continue == "No" or Continue == "n" or Continue == "N":
+      AddingClasses = False
+
+  print()
+  print(student, "\n")
+  
+
+prob3()
+  

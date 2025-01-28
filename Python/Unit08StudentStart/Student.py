@@ -12,6 +12,33 @@ class Student:
 
   
   
+  
+  def setName(self):
+    self.__name = str(input("What's your name? "))
+
+  def getName(self):
+    return self.__name
+  
+  
+  def setGradYear(self, studentGrade):
+    self.__gradYear = studentGrade
+
+  def getGradYear(self):
+    return self.__gradYear
+
+  def getTown(self):
+    return self.__town
+  
+  def setTown(self, studentTown):
+    self.__town = studentTown
+
+  def addClass(self, aclass, score):
+    self.__classes.append(aclass)
+
+  
+    self.__scores.append(score)
+  
+  
   def printClasses(self):
     temp = ""
     avg = 0
