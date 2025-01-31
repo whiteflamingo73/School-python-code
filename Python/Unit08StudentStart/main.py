@@ -96,6 +96,7 @@ def prob2():
   print("Withdraw 1800 from checking")
   user.checkingWithdrawl(1800)
   print(user, "\n")
+  
 
 
 
@@ -135,4 +136,35 @@ def prob3():
   
 
 prob3()
-  
+
+
+############################# FOUR #####################################
+
+def prob4():
+  import time
+  from StopWatch import StopWatch
+  stopWatch = StopWatch()
+  #stopWatch.returnTime()
+  stopWatch.getStartTime()
+  for i in range(10):
+    print(i)
+    time.sleep(1)
+    
+    
+  stopWatch.getEndTime()
+  print()
+
+  stopWatch.getStartTime()
+  empty = 0
+  stopWatch.start()
+  for i in range(1,1000000):
+    empty += i
+    
+  stopWatch.stop()
+  stopWatch.getEndTime()
+  stopWatch.getElapsed()
+
+
+
+
+prob4()
