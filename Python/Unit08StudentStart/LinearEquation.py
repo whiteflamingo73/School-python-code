@@ -12,27 +12,31 @@ class Line:
   #draw the line with the given end points
   def drawLine(self, acolor):
     #completed by student
+    pass
 
   #get the difference in y values for the slope formula
   def getDeltaY(self):
     #completed by student
+    pass
 
   #get the difference in x values for the slope formula
   def getDeltaX(self):
     #completed by student
+    pass
 
   #calculate and return the slope of the line
   def getM(self):
     #completed by student
+    pass
 
   #calculate and return the Y intercept, where the line crosses the Y axis
   def getB(self):
     #completed by student
+    pass
 
   #create a string value for the line for printing object
   def __str__(self):
-    return "Line from (%f, %f) to (%f, %f)" %( self.__xStart, self.__yStart,  \
-                                               self.__xEnd, self.__yEnd )
+    return "Line from (%f, %f) to (%f, %f)" %( self.__xStart, self.__yStart, self.__xEnd, self.__yEnd )
 
 
 class LinearEquation:
@@ -45,6 +49,7 @@ class LinearEquation:
   #draws cartesian coordinate x&y axis
   def drawGraph(self):
     #completed by student
+    pass
 
   #draw a circle at the intersecting point
   def drawVertex(self):

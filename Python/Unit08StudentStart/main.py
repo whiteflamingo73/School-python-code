@@ -33,7 +33,7 @@ def prob1():
 
 
 
-prob1()
+
 
 
 ############################ TWO ########################
@@ -100,7 +100,7 @@ def prob2():
 
 
 
-prob2()
+
 
 
 ############################## THREE #################################
@@ -135,7 +135,6 @@ def prob3():
   print(student, "\n")
   
 
-prob3()
 
 
 ############################# FOUR #####################################
@@ -145,26 +144,131 @@ def prob4():
   from StopWatch import StopWatch
   stopWatch = StopWatch()
   #stopWatch.returnTime()
-  stopWatch.getStartTime()
-  for i in range(10):
-    print(i)
-    time.sleep(1)
+  
     
     
-  stopWatch.getEndTime()
-  print()
 
-  stopWatch.getStartTime()
   empty = 0
   stopWatch.start()
-  for i in range(1,1000000):
+  for i in range(1,1000001):
     empty += i
     
   stopWatch.stop()
-  stopWatch.getEndTime()
-  stopWatch.getElapsed()
+  print(f'Sum of loop: {empty}')
+  print(f"Stop Time: {stopWatch.getEndTime()}")
+  print(f"Elapsed Time: {stopWatch.getElapsed()}")
+
+  stopWatch.start()
+  print("Count Down!")
+  for i in range(10,0, -1):
+    print(i)
+    time.sleep(1)
+  print()
+  stopWatch.stop()
+
+  
+
+  print(f"Start Time: {stopWatch.getStartTime()}")
+  print(f"Elapsed Time: {stopWatch.getElapsed()}")
+  print(f"Stop Time: {stopWatch.getEndTime()}")
 
 
 
 
+
+
+#while 1+1 == 2:
+#  print("yaba daba doo!")
+
+################################# FIVE ##########################################
+
+def prob5():
+  import turtle
+  from NEWLinearEquation import Line, LinearEquation
+
+  
+
+  window = turtle.Screen()
+
+  line1 = Line(200, 200, 0, 0)
+  line2 = Line(0, 200, 200, 0)
+  
+
+  line3 = Line(-250, 250, 0, 0)
+  line4 = Line(-250, 0, 0, 250)
+
+  line5 = Line(100, 0, 0, -100)
+  line6 = Line(0, -10, 200, -200)
+
+  line7 = Line(-100, 0, 0, -100)
+  line8 = Line(-200, 0, 0, -200)
+
+  lq1 = LinearEquation(line1, line2)
+  lq1.drawGraph()
+  lq1.drawVertex()
+
+  lq2 = LinearEquation(line3, line4)
+  lq2.drawVertex()
+
+  lq3 = LinearEquation(line5, line6)
+  lq3.drawVertex()
+
+  lq4 = LinearEquation(line7, line8)
+  lq4.drawVertex()
+
+  line1.drawLine("blue")
+  line2.drawLine("red")
+
+  line3.drawLine("green")
+  line4.drawLine("purple")
+
+  line5.drawLine("green")
+  line6.drawLine("blue")
+
+  line7.drawLine("gold")
+  line8.drawLine("red")
+
+  print(line1)
+  print(line2)
+  print(line3)
+  print(line4)
+  print(line5)
+  print(line6)
+  print(line7)
+  print(line8)
+  print()
+  print(f"Line 1 M: {line1.getM()}")
+  print(f"Line 2 M: {line2.getM()}")
+  print(f"Line 3 M: {line3.getM()}")
+  print(f"Line 4 M: {line4.getM()}")
+  print(f"Line 5 M: {line5.getM()}")
+  print(f"Line 6 M: {line6.getM()}")
+  print(f"Line 7 M: {line7.getM()}")
+  print(f"Line 8 M: {line8.getM()}")
+  print()
+  print(f"Line 1 B: {line1.getB()}")
+  print(f"Line 2 B: {line2.getB()}")
+  print(f"Line 3 B: {line3.getB()}")
+  print(f"Line 4 B: {line4.getB()}")
+  print(f"Line 5 B: {line5.getB()}")
+  print(f"Line 6 B: {line6.getB()}")
+  print(f"Line 7 B: {line7.getB()}")
+  print(f"Line 8 B: {line8.getB()}")
+
+  
+ 
+
+ 
+
+  window.mainloop()
+
+
+
+
+
+
+prob1()
+prob2()
+prob3()
 prob4()
+prob5()

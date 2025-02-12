@@ -1,17 +1,17 @@
 import time
 
 class StopWatch:
-    def __init__(self):
-        self.__startTime = 0
-        self.__endTime = 0
+    def __init__(self, startTime=0, endTime=0):
+        self.startTime = startTime
+        self.endTime = endTime
 
     def start(self):
-        self.__startTime = time.time()
-        return self.__startTime
+        self.startTime = int(time.time() * 1000)/1000
+        
 
     def stop(self):
-        self.__endTime = time.time()
-        return self.__endTime
+        self.endTime = time.time()
+        
     
     def returnTime(self, thetime= time.time()):
         totalSeconds = int(thetime)
@@ -22,22 +22,26 @@ class StopWatch:
         currentHours = totalHours % 24
         currentMinutes = totalMinutes % 60
         currentSeconds = totalSeconds % 60
-        currentMilliseconds = totalMilliseconds % 100
+        currentMilliseconds = totalMilliseconds % 1000
 
-        print(f'{currentHours}:{currentMinutes}:{currentSeconds}:{currentMilliseconds}')
+        #print(f'{currentHours}:{currentMinutes}:{currentSeconds}:{currentMilliseconds}')
         return (f'{currentHours}:{currentMinutes}:{currentSeconds}:{currentMilliseconds}')
 
     def getStartTime(self):
-        self.start()
-        return self.returnTime(self.__startTime)
+        return self.returnTime(self.startTime)
 
     def getEndTime(self):
-        self.stop()
-        return self.returnTime(self.__endTime)
+        return self.returnTime(self.endTime)
 
     def getElapsed(self):
         
-        return self.returnTime(self.__endTime - self.__startTime)
+        return self.returnTime(self.endTime - self.startTime)
+    
+    #def getEnd(self):
+    #    self.returnTime(self.endTime)
+    
+    #def getBeginning(self):
+    #    self.returnTime(self.startTime)
 
 
         
