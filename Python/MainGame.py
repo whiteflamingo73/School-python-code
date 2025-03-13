@@ -31,7 +31,7 @@ menu = MainMenu(GameMode)
 
 diagonalDirection = None
 # Set up the drawing window
-screen = pygame.display.set_mode([width, height])
+screen = pygame.display.set_mode([width, height], pygame.RESIZABLE)
 
 # Run until the user asks to quit
 running = True
@@ -49,19 +49,14 @@ while running:
     ###Main Menu###
     def startmenu(GameMode):
         menu.startMenu(GameMode)
-        GameMode = menu.gameMode
-        print(f'gamemode in func = {GameMode}')
-        return GameMode
+        return menu.gameMode
         
     
     
         
     
-    if GameMode == None: 
+    if menu.gameMode == None: 
         startmenu(GameMode)
-
-        
-        print(f'gamemode = {GameMode}')
 
 
 
