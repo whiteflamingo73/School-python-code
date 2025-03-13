@@ -2,11 +2,16 @@
 
 # Import and initialize the pygame library
 import pygame
+import spritesheets
 import math
 from GameClasses import MainMenu
 from pygame.locals import *
 pygame.init()
 
+sprite_sheet_image = pygame.image.load("/home/abargd/Desktop/Python/UnitPygame/Sprites/doux.png").convert_alpha()
+sprite_sheet = spritesheets.SpriteSheet(sprite_sheet_image)
+BG = (50, 50, 50)
+BLACK = (0, 0, 0)
 width = 1000
 height = 1000
 
@@ -30,6 +35,26 @@ GameMode = None
 menu = MainMenu(GameMode)
 
 diagonalDirection = None
+
+animation_list = []
+animation_steps = [4, 6, 3, 4]
+action = 0
+last_update = pygame.time.get_ticks()
+animation_cooldown = 100
+frame = 0
+step_counter = 0
+
+
+for animation in animation_steps:
+    temp_img_list = []
+    for _ in range(animation):
+        temp_img_list.append(sprite_sheet.get_image(step_counter, 24, 24, 3, BLACK))
+        step_counter += 1
+    animation_list.append(temp_img_list)
+
+print(animation_list)
+
+
 # Set up the drawing window
 screen = pygame.display.set_mode([width, height], pygame.RESIZABLE)
 
@@ -72,8 +97,11 @@ while running:
         direction = 'west'
     if (pressed[K_UP] or pressed[K_w]):
         direction = 'north'
-    if (pressed[K_DOWN] or pressed[K_s]):
+    if (pressed[K_DOWN] > 0 or pressed[K_s]):
         direction = 'south'
+        action += 1
+        frame = 0
+
     
     #Movements, diagonal
 
@@ -127,6 +155,17 @@ while running:
 
     # Fill the background with white
     screen.fill(light_Blue)
+
+    current_time = pygame.time.get_ticks()
+    if current_time - last_update >= animation_cooldown:
+        frame += 1
+        last_update = current_time
+        if frame >= len(animation_list[action]):
+            frame = 0
+
+    screen.blit(animation_list[action][frame], (0, 0))
+
+    
 
     
     if menu.gameMode == 3:
