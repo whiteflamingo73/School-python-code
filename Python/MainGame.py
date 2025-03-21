@@ -4,7 +4,10 @@
 import pygame
 import spritesheets
 import math
+import GameClasses
+from GameClasses import Platform
 from GameClasses import MainMenu
+
 from pygame.locals import *
 pygame.init()
 
@@ -27,6 +30,10 @@ red = (255, 0, 20)
 velocity = 1
 direction = None
 
+
+gravity = 9.8
+jumpforce = 18
+
 playerXCoords = []
 playerYCoords = []
 
@@ -37,7 +44,7 @@ menu = MainMenu(GameMode)
 diagonalDirection = None
 
 animation_list = []
-animation_steps = [4, 6, 3, 4]
+animation_steps = [4, 6, 3, 4, 7]
 action = 0
 last_update = pygame.time.get_ticks()
 animation_cooldown = 100
@@ -70,7 +77,8 @@ while running:
             running = False
 
 
-    pressed = pygame.key.get_pressed()     
+    pressed = pygame.key.get_pressed()
+      
     ###Main Menu###
     def startmenu(GameMode):
         menu.startMenu(GameMode)
@@ -93,26 +101,32 @@ while running:
     
     if (pressed[K_RIGHT] or pressed[K_d]):
         direction = 'east'
+        
     if (pressed[K_LEFT] or pressed[K_a]):
         direction = 'west'
+        
     if (pressed[K_UP] or pressed[K_w]):
         direction = 'north'
-    if (pressed[K_DOWN] > 0 or pressed[K_s]):
+        
+    if (pressed[K_DOWN] or pressed[K_s]):
         direction = 'south'
-        action += 1
-        frame = 0
+        
 
     
     #Movements, diagonal
 
     if (pressed[K_RIGHT] and pressed[K_UP]):
         diagonalDirection = 'NorthEast'
+        
     if (pressed[K_LEFT] and pressed[K_UP]):
         diagonalDirection = 'NorthWest'
+        
     if (pressed[K_RIGHT] and pressed[K_DOWN]):
         diagonalDirection = 'SouthEast'
+        
     if (pressed[K_LEFT] and pressed[K_DOWN]):
         diagonalDirection = 'SouthWest'
+        
     
 
     ############
@@ -153,6 +167,55 @@ while running:
         diagonalDirection = None
         
 
+    #Animation updates
+    if (pressed[K_RIGHT] or pressed[K_d]):
+        
+        action = 1
+        if frame >= 4:
+            frame = 0
+    
+    if pressed[K_LEFT] or pressed[K_a]:
+        action = 1
+        if frame >= 4:
+            frame = 0
+
+    if (pressed[K_q]):
+        
+        action = 2
+        if frame >= 3:
+            frame = 0
+    if (pressed[K_UP] or pressed[K_w]):
+        
+        action = 1
+        if frame >= 4:
+            frame = 0
+    if (pressed[K_DOWN] or pressed[K_s]):
+        action = 1
+        if frame >=4:
+            frame = 0
+    
+    if (pressed[K_LCTRL] and pressed[K_w] or pressed[K_LCTRL] and pressed[K_a] or pressed[K_LCTRL] and pressed[K_s] or pressed[K_LCTRL] and pressed[K_d] or pressed[K_LCTRL] and pressed[K_UP] or pressed[K_LCTRL] and pressed[K_LEFT] or pressed[K_LCTRL] and pressed[K_DOWN] or pressed[K_LCTRL] and pressed[K_RIGHT]):
+        action = 4
+        if frame >= 4:
+            frame = 0
+        
+        velocity = 2
+    
+    else:
+        
+        velocity = 1
+
+
+    if event.type == pygame.KEYUP:
+        pass
+        if event.key == K_d or event.key == K_s or event.key == K_a or event.key == K_w or event.key == K_UP or event.key == K_LEFT or event.key == K_DOWN or event.key == K_RIGHT or event.key == K_q:
+            action = 0
+            if frame >= 4:
+                frame = 0
+
+    
+    print(frame)
+
     # Fill the background with white
     screen.fill(light_Blue)
 
@@ -163,7 +226,7 @@ while running:
         if frame >= len(animation_list[action]):
             frame = 0
 
-    screen.blit(animation_list[action][frame], (0, 0))
+    screen.blit(animation_list[action][frame], (playerX, playerY))
 
     
 
@@ -180,6 +243,13 @@ while running:
         if (pressed[K_c]):
             playerXCoords.clear()
             playerYCoords.clear()
+    
+
+    if menu.gameMode == 2:
+        createdplatform = Platform(playerX, playerY, jumpforce)
+
+        for i in range(5):
+            createdplatform.platform()
 
     # Draw a solid blue circle in the center
     pygame.draw.circle(screen, red, (playerX, playerY), 15)
