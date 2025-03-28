@@ -4,7 +4,7 @@
 import pygame
 import spritesheets
 import math
-import GameClasses
+
 from GameClasses import Platform
 from GameClasses import MainMenu
 
@@ -28,10 +28,12 @@ blue = (0, 0, 255)
 red = (255, 0, 20)
 
 velocity = 1
+gravity = 1
+
 direction = None
 
+platformlist = []
 
-gravity = 9.8
 jumpforce = 18
 
 playerXCoords = []
@@ -165,7 +167,8 @@ while running:
         playerX -= (velocity)/2
         playerY += (velocity)/2
         diagonalDirection = None
-        
+
+ 
 
     #Animation updates
     if (pressed[K_RIGHT] or pressed[K_d]):
@@ -212,9 +215,11 @@ while running:
             action = 0
             if frame >= 4:
                 frame = 0
+    
+    
 
     
-    print(frame)
+
 
     # Fill the background with white
     screen.fill(light_Blue)
@@ -248,8 +253,25 @@ while running:
     if menu.gameMode == 2:
         createdplatform = Platform(playerX, playerY, jumpforce)
 
-        for i in range(5):
-            createdplatform.platform()
+        #Gravity pull
+
+        playerY += gravity
+
+        #check collision with ground
+
+        if playerY >= height:
+            playerY -= 20
+        
+            
+        
+        if len(platformlist) < 5:
+            for i in range(5):
+            
+                platformlist.append(createdplatform.platform())
+        
+        if len(platformlist) > 5:
+            for i in range(0, len(createdplatform.platformX)):
+                pygame.draw.rect(screen, (50, 220, 12), (createdplatform.platformX[i], createdplatform.platformY[i], createdplatform.platformW[i], createdplatform.platformH[i]))
 
     # Draw a solid blue circle in the center
     pygame.draw.circle(screen, red, (playerX, playerY), 15)

@@ -104,17 +104,24 @@ class MainMenu:
 
 class Platform:
     
-    def __init__(self, charX, charY, charVel):
+    def __init__(self, charX, charY, charVel, platformX=[], platformY=[], platformW=[], platformH=[]):
         self.charX = charX
         self.charY = charY
         self.charVel = charVel
+        self.platformX = platformX
+        self.platformY = platformY
+        self.platformH = platformH
+        self.platformW = platformW
 
     
-    def platform():
-        X = random.randint(20, 100)
-        Y = random.randint(30, 100)
-
-        W = random.randint(10, 20)
-        H = random.randint(4, 10)
+    def platform(self):
+        X = random.randint(20, 1000)
+        self.platformX.append(X)
+        Y = random.randint(30, 1000)
+        self.platformY.append(Y)
+        W = random.randint(100, 300)
+        self.platformW.append(W)
+        H = random.randint(30, 75)
+        self.platformH.append(H)
 
         generatedPlatform = pygame.draw.rect(screen, (50, 220, 12), (X, Y, W, H))
