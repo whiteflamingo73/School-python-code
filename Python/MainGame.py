@@ -2,17 +2,18 @@
 
 # Import and initialize the pygame library
 import pygame
-import spritesheets
+
 import math
 
+from GameClasses import Player
 from GameClasses import Platform
 from GameClasses import MainMenu
+
 
 from pygame.locals import *
 pygame.init()
 
-sprite_sheet_image = pygame.image.load("/home/abargd/Desktop/Python/UnitPygame/Sprites/doux.png").convert_alpha()
-sprite_sheet = spritesheets.SpriteSheet(sprite_sheet_image)
+
 BG = (50, 50, 50)
 BLACK = (0, 0, 0)
 width = 1000
@@ -45,23 +46,12 @@ menu = MainMenu(GameMode)
 
 diagonalDirection = None
 
-animation_list = []
-animation_steps = [4, 6, 3, 4, 7]
-action = 0
-last_update = pygame.time.get_ticks()
-animation_cooldown = 100
-frame = 0
-step_counter = 0
 
 
-for animation in animation_steps:
-    temp_img_list = []
-    for _ in range(animation):
-        temp_img_list.append(sprite_sheet.get_image(step_counter, 24, 24, 3, BLACK))
-        step_counter += 1
-    animation_list.append(temp_img_list)
 
-print(animation_list)
+
+
+#print(animation_list)
 
 
 # Set up the drawing window
@@ -84,17 +74,10 @@ while running:
     ###Main Menu###
     def startmenu(GameMode):
         menu.startMenu(GameMode)
-        return menu.gameMode
-        
-    
-    
-        
+        return menu.gameMode    
     
     if menu.gameMode == None: 
         startmenu(GameMode)
-
-
-
 
 
     ###PLAYER ACTIONS###
@@ -129,13 +112,9 @@ while running:
     if (pressed[K_LEFT] and pressed[K_DOWN]):
         diagonalDirection = 'SouthWest'
         
-    
-
     ############
 
     ### LOGICAL UPDATES FOR PLAYER
-    
-    
 
     #Movement Updates
     if direction == 'east':
@@ -168,72 +147,16 @@ while running:
         playerY += (velocity)/2
         diagonalDirection = None
 
- 
-
-    #Animation updates
-    if (pressed[K_RIGHT] or pressed[K_d]):
-        
-        action = 1
-        if frame >= 4:
-            frame = 0
-    
-    if pressed[K_LEFT] or pressed[K_a]:
-        action = 1
-        if frame >= 4:
-            frame = 0
-
-    if (pressed[K_q]):
-        
-        action = 2
-        if frame >= 3:
-            frame = 0
-    if (pressed[K_UP] or pressed[K_w]):
-        
-        action = 1
-        if frame >= 4:
-            frame = 0
-    if (pressed[K_DOWN] or pressed[K_s]):
-        action = 1
-        if frame >=4:
-            frame = 0
-    
-    if (pressed[K_LCTRL] and pressed[K_w] or pressed[K_LCTRL] and pressed[K_a] or pressed[K_LCTRL] and pressed[K_s] or pressed[K_LCTRL] and pressed[K_d] or pressed[K_LCTRL] and pressed[K_UP] or pressed[K_LCTRL] and pressed[K_LEFT] or pressed[K_LCTRL] and pressed[K_DOWN] or pressed[K_LCTRL] and pressed[K_RIGHT]):
-        action = 4
-        if frame >= 4:
-            frame = 0
-        
-        velocity = 2
-    
-    else:
-        
-        velocity = 1
-
-
-    if event.type == pygame.KEYUP:
-        pass
-        if event.key == K_d or event.key == K_s or event.key == K_a or event.key == K_w or event.key == K_UP or event.key == K_LEFT or event.key == K_DOWN or event.key == K_RIGHT or event.key == K_q:
-            action = 0
-            if frame >= 4:
-                frame = 0
-    
-    
-
-    
-
 
     # Fill the background with white
     screen.fill(light_Blue)
 
-    current_time = pygame.time.get_ticks()
-    if current_time - last_update >= animation_cooldown:
-        frame += 1
-        last_update = current_time
-        if frame >= len(animation_list[action]):
-            frame = 0
-
-    screen.blit(animation_list[action][frame], (playerX, playerY))
-
     
+
+    #screen.blit(animation_list[action][frame], (playerX, playerY))
+    dino = Player(playerX, playerY)
+    dino.playersprite()
+    dino.draw()
 
     
     if menu.gameMode == 3:
@@ -275,6 +198,7 @@ while running:
 
     # Draw a solid blue circle in the center
     pygame.draw.circle(screen, red, (playerX, playerY), 15)
+    
 
     # Flip the display
     pygame.display.flip()

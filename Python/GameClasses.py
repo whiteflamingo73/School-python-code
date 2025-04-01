@@ -124,4 +124,95 @@ class Platform:
         H = random.randint(30, 75)
         self.platformH.append(H)
 
-        generatedPlatform = pygame.draw.rect(screen, (50, 220, 12), (X, Y, W, H))
+import spritesheets
+sprite_sheet_image = pygame.image.load("/home/abargd/Desktop/Python/UnitPygame/Sprites/doux.png").convert_alpha()
+class Player:
+    
+
+    
+
+    def __init__(self, x, y):
+        self.image = sprite_sheet_image 
+        self.rect = self.image.get_rect()
+        self.rect.center = (x, y)
+        self.flip = True
+
+    def playersprite(self, sprite_sheet_image=sprite_sheet_image):
+        BLACK = (0, 0, 0)
+
+        
+        sprite_sheet = spritesheets.SpriteSheet(sprite_sheet_image)
+        animation_list = []
+        animation_steps = [4, 6, 3, 4, 7]
+        action = 0
+        last_update = pygame.time.get_ticks()
+        animation_cooldown = 100
+        frame = 0
+        step_counter = 0
+
+        for animation in animation_steps:
+            temp_img_list = []
+            for _ in range(animation):
+                temp_img_list.append(sprite_sheet.get_image(step_counter, 24, 24, 3, BLACK))
+                step_counter += 1
+            animation_list.append(temp_img_list)
+    
+        current_time = pygame.time.get_ticks()
+        if current_time - last_update >= animation_cooldown:
+            frame += 1
+            last_update = current_time
+            if frame >= len(animation_list[action]):
+                frame = 0
+                print(frame)
+        
+        #Animation updates
+        pressed = pygame.key.get_pressed()
+        if (pressed[K_RIGHT] or pressed[K_d]):    
+            action = 1
+            if frame >= 4:
+                frame = 0
+        if pressed[K_LEFT] or pressed[K_a]:
+            action = 1
+            if frame >= 4:
+                frame = 0
+        if (pressed[K_q]): 
+            action = 2
+            if frame >= 3:
+                frame = 0
+        if (pressed[K_UP] or pressed[K_w]):
+            action = 1
+            if frame >= 4:
+                frame = 0
+        if (pressed[K_DOWN] or pressed[K_s]):
+            action = 1
+            if frame >=4:
+                frame = 0
+        if (pressed[K_LCTRL] and pressed[K_w] or pressed[K_LCTRL] and pressed[K_a] or pressed[K_LCTRL] and pressed[K_s] or pressed[K_LCTRL] and pressed[K_d] or pressed[K_LCTRL] and pressed[K_UP] or pressed[K_LCTRL] and pressed[K_LEFT] or pressed[K_LCTRL] and pressed[K_DOWN] or pressed[K_LCTRL] and pressed[K_RIGHT]):
+            action = 4
+            if frame >= 4:
+                frame = 0
+        
+            velocity = 2
+        else:    
+            velocity = 1
+
+
+        # if event.type == pygame.KEYUP:
+        #     pass
+        #     if event.key == K_d or event.key == K_s or event.key == K_a or event.key == K_w or event.key == K_UP or event.key == K_LEFT or event.key == K_DOWN or event.key == K_RIGHT or event.key == K_q:
+        #         action = 0
+        #         if frame >= 4:
+        #             frame = 0
+        
+
+       
+        self.image = (animation_list[action][frame])
+        return self.image
+    
+    def draw(self):
+        screen.blit(pygame.transform.flip(self.image, self.flip, False), (self.rect.x - 12, self.rect.y - 5))
+        pygame.draw.rect(screen, (0, 0, 0), self.rect, 2)
+
+    
+
+         
